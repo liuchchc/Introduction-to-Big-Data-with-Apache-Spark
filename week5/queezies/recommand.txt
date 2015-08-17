@@ -1,0 +1,19 @@
+ratingsRDD£º(UserID, MovieID, Rating)
+moviesRDD£º(MovieID, Title)
+sortFunction
+getCountsAndAverages
+movieIDsWithRatingsRDD£º£¨MovieID, iterable of Ratings for that MovieID)
+movieIDsWithAvgRatingsRDD£º(MovieID, (number of ratings, average rating))
+movieNameWithAvgRatingsRDD£º(average rating, movie name, number of ratings)
+
+trainingRDD, validationRDD, testRDD£º(UserID, MovieID, Rating)
+myRatedMovies£¬trainingWithMyRatingsRDD£º(myUserID, movie ID, your rating)
+predictedRDD£º (UserID, MovieID, Rating)
+movieCountsRDD£º(MovieID, number of ratings)
+
+predictedWithCountsRDD£º (Movie ID, (Predicted Rating, number of ratings))
+
+
+ratingsWithNamesRDD = (predictedWithCountsRDD
+                       .join(moviesRDD).map(lambda x: (x[1][0], x[1][2], x[1][1]))
+                       .filter(lambda x: x[2] > 75))
